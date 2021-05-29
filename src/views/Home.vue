@@ -1,15 +1,15 @@
 <template>
-  <hello-world />
+  <NewEvent />
 </template>
 
 <script>
-import HelloWorld from '../components/NewEvent';
+import NewEvent from "../components/NewEvent";
 
 export default {
-  name: 'Home',
+  name: "Home",
 
   components: {
-    HelloWorld,
+    NewEvent,
   },
 };
 </script>
