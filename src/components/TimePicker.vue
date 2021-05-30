@@ -33,6 +33,11 @@ export default {
       modal: false,
     };
   },
+  watch: {
+    time(value) {
+      this.$emit("value-change", value);
+    },
+  },
 };
 </script>
 

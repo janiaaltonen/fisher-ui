@@ -17,7 +17,7 @@
           </v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-select
-              :items="species"
+              :items="fishSpecies"
               v-model="c.species"
               item-text="value"
               item-value="value"
@@ -82,6 +82,7 @@
 
 <script>
 import NumberSlider from "./NumberSlider";
+
 export default {
   name: "AddCatches",
   components: { NumberSlider },
@@ -134,6 +135,16 @@ export default {
       ],
     };
   },
+  computed: {
+    fishSpecies() {
+      const options = this.$store.state.fishCatch.fishSpeciesOptions;
+      const names = this.$i18n.messages.en.fishSpecies;
+      return options.map((v) => ({
+        key: v.name,
+        value: names[v.name],
+      }));
+    },
+  },
   methods: {
     addLength(index, value) {
       this.catches[index].length = value;
@@ -161,15 +172,39 @@ export default {
     },
     previous() {
       this.$emit("swap-component", "BasicInfo");
-      console.log(this.noCatches);
     },
     save() {
+      if (this.isValid()) {
+        this.saveCatches();
+      }
       // gathers inputted data in parent component
       // sends event to server
+    },
+    isValid() {
+      let isValid = true;
+      if (this.noCatches) {
+        return isValid;
+      }
+      this.catches.forEach((v) => {
+        if (!v.species) {
+          isValid = false;
+        }
+      });
+      return isValid;
+    },
+    saveCatches() {
+      let data = "";
+      if (this.noCatches) {
+        data = [];
+      } else {
+        data = JSON.parse(JSON.stringify(this.catches));
+      }
+      this.$store.dispatch("fishCatch/setNewFishingEventCatches", data);
     },
   },
 
   created() {
+    this.$store.dispatch("fishCatch/getFishSpecies");
     if (!this.noCatches && this.catches.length === 0) {
       this.catches.push(this.fish);
     }

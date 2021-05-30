@@ -34,6 +34,11 @@ export default {
       modal: false,
     };
   },
+  watch: {
+    date(value) {
+      this.$emit("value-change", value);
+    },
+  },
 };
 </script>
 

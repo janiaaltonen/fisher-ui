@@ -18,11 +18,8 @@ export default {
   },
   methods: {
     swapComponent(component) {
-      console.log(component);
       this.currentComponent = component;
     },
   },
 };
 </script>
-
-<style scoped></style>

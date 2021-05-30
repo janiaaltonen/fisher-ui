@@ -1,0 +1,12 @@
+{
+  "message": "hello i18n !!",
+  "fishSpecies": {
+    "perch": "Perch",
+    "pike": "Pike",
+    "zander": "Zander",
+    "bream": "Bream",
+    "trout": "Trout",
+    "roach": "Roach",
+    "white fish": "White fish"
+  }
+}
