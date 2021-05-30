@@ -98,21 +98,6 @@ export default {
         lure: "",
         lureDetails: "",
       },
-      a: "",
-      species: [
-        {
-          key: "perch",
-          value: "Perch",
-        },
-        {
-          key: "pike",
-          value: "Pike",
-        },
-        {
-          key: "zander",
-          value: "Zander",
-        },
-      ],
       fishing_techniques: [
         {
           key: "fly_fishing",
