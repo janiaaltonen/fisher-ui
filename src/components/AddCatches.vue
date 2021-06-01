@@ -41,7 +41,7 @@
             >
             </v-text-field>
             <v-select
-              :items="fishing_techniques"
+              :items="fishingMethods"
               v-model="c.fishing_technique"
               item-text="value"
               item-value="value"
@@ -51,7 +51,7 @@
               clearable
             ></v-select>
             <v-select
-              :items="lures"
+              :items="lureOptions"
               v-model="c.lure"
               item-text="value"
               item-value="value"
@@ -95,35 +95,32 @@ export default {
         length: null,
         weight: "",
         fishing_technique: "",
+        fishing_technique_details: "",
         lure: "",
         lureDetails: "",
       },
-      fishing_techniques: [
-        {
-          key: "fly_fishing",
-          value: "Fly Fishing",
-        },
-        {
-          key: "net",
-          value: "Net",
-        },
-      ],
-      lures: [
-        {
-          key: "jig",
-          value: "Jig",
-        },
-        {
-          key: "wobbler",
-          value: "Wobbler",
-        },
-      ],
     };
   },
   computed: {
     fishSpecies() {
       const options = this.$store.state.fishCatch.fishSpeciesOptions;
       const names = this.$i18n.messages.en.fishSpecies;
+      return options.map((v) => ({
+        key: v.name,
+        value: names[v.name],
+      }));
+    },
+    lureOptions() {
+      const options = this.$store.state.fishCatch.lureOptions;
+      const names = this.$i18n.messages.en.lures;
+      return options.map((v) => ({
+        key: v.name,
+        value: names[v.name],
+      }));
+    },
+    fishingMethods() {
+      const options = this.$store.state.fishCatch.fishingMethodOptions;
+      const names = this.$i18n.messages.en.fishingMethods;
       return options.map((v) => ({
         key: v.name,
         value: names[v.name],
@@ -156,11 +153,15 @@ export default {
       this.catches.push(newCatch);
     },
     previous() {
+      // save catches to store if user returns to basic info
+      const catches = JSON.parse(JSON.stringify(this.catches));
+      this.$store.dispatch("fishCatch/setNewFishingEventCatches", catches);
       this.$emit("swap-component", "BasicInfo");
     },
     save() {
       if (this.isValid()) {
-        this.saveCatches();
+        const data = this.parseCatches();
+        this.saveCatches(data);
       }
       // gathers inputted data in parent component
       // sends event to server
@@ -177,19 +178,39 @@ export default {
       });
       return isValid;
     },
-    saveCatches() {
-      let data = "";
+    parseCatches() {
       if (this.noCatches) {
-        data = [];
-      } else {
-        data = JSON.parse(JSON.stringify(this.catches));
+        return [];
       }
+      const catches = JSON.parse(JSON.stringify(this.catches));
+      catches.forEach((v) => {
+        const species = this.$i18n.messages.en.fishSpecies;
+        v.species = Object.keys(species).find(
+          (key) => species[key] === v.species
+        );
+        if (v.fishing_technique) {
+          const fMethods = this.$i18n.messages.en.fishingMethods;
+          v.fishing_technique = Object.keys(fMethods).find(
+            (key) => fMethods[key] === v.fishing_technique
+          );
+        }
+        if (v.lure) {
+          const lures = this.$i18n.messages.en.lures;
+          v.lure = Object.keys(lures).find((key) => lures[key] === v.lure);
+        }
+      });
+      console.log("altered catches", catches);
+      return catches;
+    },
+    saveCatches(data) {
       this.$store.dispatch("fishCatch/setNewFishingEventCatches", data);
     },
   },
 
   created() {
-    this.$store.dispatch("fishCatch/getFishSpecies");
+    // gets needed options values from backend
+    this.$store.dispatch("fishCatch/getCatchOptionsData");
+    // needs no catches to store if user comes back from basicinfo, value needs to be "remembered"
     if (!this.noCatches && this.catches.length === 0) {
       this.catches.push(this.fish);
     }

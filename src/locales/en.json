@@ -8,5 +8,23 @@
     "trout": "Trout",
     "roach": "Roach",
     "white fish": "White fish"
+  },
+  "lures": {
+    "jig": "Jig",
+    "wobbler": "Wobbler",
+    "spinnerbait": "Spinnerbait",
+    "spoon lure": "Spoon lure"
+  },
+  "fishingMethods": {
+    "fly fishing": "Fly fishing",
+    "ice fishing": "Ice fishing",
+    "net": "Net"
+  },
+  "weatherOptions": {
+    "sunny": "Sunny",
+    "cloudy": "Cloudy",
+    "partly cloudy": "Partly cloudy",
+    "rain": "Rain",
+    "snowfall": "Snowfall"
   }
 }

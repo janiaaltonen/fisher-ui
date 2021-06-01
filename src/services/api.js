@@ -15,6 +15,24 @@ export const getSpecies = async () => {
   }
 };
 
+export const getLureOptions = async () => {
+  try {
+    const r = await http.get("lureOptions");
+    return r.data;
+  } catch (e) {
+    return [];
+  }
+};
+
+export const getFishingMethods = async () => {
+  try {
+    const r = await http.get("fishingTechniqueOptions");
+    return r.data;
+  } catch (e) {
+    return [];
+  }
+};
+
 export const getWeatherOptions = async () => {
   try {
     const r = await http.get("weatherOptions");

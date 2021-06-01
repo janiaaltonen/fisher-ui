@@ -49,6 +49,8 @@
       :items="weatherOptions"
       v-model="basicInfo.weather"
       label="Weather"
+      item-text="value"
+      item-value="value"
       dense
       outlined
       clearable
@@ -85,9 +87,11 @@ export default {
   computed: {
     weatherOptions() {
       const options = this.$store.state.fishCatch.weatherOptions;
-      return options.map((v) => {
-        return v.name;
-      });
+      const weathers = this.$i18n.messages.en.weatherOptions;
+      return options.map((v) => ({
+        key: v.name,
+        value: weathers[v.name],
+      }));
     },
   },
   methods: {
@@ -128,6 +132,12 @@ export default {
     },
     saveBasicInfo() {
       const data = JSON.parse(JSON.stringify(this.basicInfo));
+      if (data.weather) {
+        const weathers = this.$i18n.messages.en.weatherOptions;
+        data.weather = Object.keys(weathers).find(
+          (key) => weathers[key] === data.weather
+        );
+      }
       this.$store.dispatch("fishCatch/setNewFishingEvent", data);
     },
   },
