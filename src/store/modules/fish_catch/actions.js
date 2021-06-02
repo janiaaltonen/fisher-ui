@@ -3,7 +3,9 @@ import {
   getLureOptions,
   getFishingMethods,
   getWeatherOptions,
+  createNewFishingEvent,
 } from "../../../services/api";
+import state from "./state";
 
 export default {
   setNewFishingEvent({ commit }, data) {
@@ -40,5 +42,11 @@ export default {
   async getWeatherOptions({ commit }) {
     const data = await getWeatherOptions();
     commit("setWeatherOptions", data);
+  },
+
+  async saveNewFishingEvent() {
+    const data = state.newFishingEvent;
+    const r = await createNewFishingEvent(data);
+    console.log(r);
   },
 };

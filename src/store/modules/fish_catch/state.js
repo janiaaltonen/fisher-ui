@@ -4,4 +4,5 @@ export default {
   lureOptions: [],
   fishingMethodOptions: [],
   weatherOptions: [],
+  isSending: false,
 };

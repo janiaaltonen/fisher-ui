@@ -35,6 +35,7 @@
             <v-text-field
               v-model="c.weight"
               label="Weight (kg)"
+              :rules="weightRules"
               dense
               outlined
               clearable
@@ -99,6 +100,13 @@ export default {
         lure: "",
         lureDetails: "",
       },
+      weightRules: [
+        (value) => (value || "").length <= 6 || "Max 5 numbers",
+        (value) => {
+          const pattern = /^$|(\d+(?:[.,]\d+)?)$/;
+          return pattern.test(value) || "invalid number";
+        },
+      ],
     };
   },
   computed: {
@@ -199,11 +207,11 @@ export default {
           v.lure = Object.keys(lures).find((key) => lures[key] === v.lure);
         }
       });
-      console.log("altered catches", catches);
       return catches;
     },
     saveCatches(data) {
       this.$store.dispatch("fishCatch/setNewFishingEventCatches", data);
+      this.$store.dispatch("fishCatch/saveNewFishingEvent");
     },
   },
 

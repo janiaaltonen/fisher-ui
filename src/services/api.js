@@ -41,3 +41,15 @@ export const getWeatherOptions = async () => {
     return [];
   }
 };
+
+export const createNewFishingEvent = async (data) => {
+  try {
+    const r = await http.post("createFishingEvent", data);
+    return r;
+  } catch (e) {
+    return {
+      status: 400,
+      message: "failed",
+    };
+  }
+};
