@@ -20,4 +20,7 @@ export default {
   setLureOptions: (state, data) => {
     state.lureOptions = data;
   },
+  setFishingEvents: (state, data) => {
+    state.fishingEvents = data;
+  },
 };

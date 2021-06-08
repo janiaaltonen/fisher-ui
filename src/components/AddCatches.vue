@@ -18,7 +18,7 @@
           <v-expansion-panel-content>
             <v-select
               :items="fishSpecies"
-              v-model="c.species"
+              v-model="c.fish_species"
               item-text="value"
               item-value="value"
               label="Species"
@@ -92,13 +92,13 @@ export default {
       noCatches: false,
       catches: [],
       fish: {
-        species: "",
+        fish_species: "",
         length: null,
-        weight: "",
+        weight: null,
         fishing_technique: "",
         fishing_technique_details: "",
         lure: "",
-        lureDetails: "",
+        lure_details: "",
       },
       weightRules: [
         (value) => (value || "").length <= 6 || "Max 5 numbers",
@@ -151,12 +151,12 @@ export default {
     },
     addNewCatch() {
       const newCatch = {
-        species: "",
+        fish_species: "",
         length: null,
         weight: "",
         fishing_technique: "",
         lure: "",
-        lureDetails: "",
+        lure_details: "",
       };
       this.catches.push(newCatch);
     },
@@ -180,7 +180,7 @@ export default {
         return isValid;
       }
       this.catches.forEach((v) => {
-        if (!v.species) {
+        if (!v.fish_species) {
           isValid = false;
         }
       });
@@ -193,8 +193,8 @@ export default {
       const catches = JSON.parse(JSON.stringify(this.catches));
       catches.forEach((v) => {
         const species = this.$i18n.messages.en.fishSpecies;
-        v.species = Object.keys(species).find(
-          (key) => species[key] === v.species
+        v.fish_species = Object.keys(species).find(
+          (key) => species[key] === v.fish_species
         );
         if (v.fishing_technique) {
           const fMethods = this.$i18n.messages.en.fishingMethods;

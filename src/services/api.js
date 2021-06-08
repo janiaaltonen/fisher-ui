@@ -53,3 +53,20 @@ export const createNewFishingEvent = async (data) => {
     };
   }
 };
+
+export const getAllEvents = async () => {
+  try {
+    const r = await http.get("allEvents");
+    return r.data;
+  } catch (e) {
+    return [];
+  }
+};
+/*
+export const getFullFishingEvent = async () => {
+  try {
+    const r = await http.get("fullEvent");
+    return;
+  } catch (e) {}
+};
+ */

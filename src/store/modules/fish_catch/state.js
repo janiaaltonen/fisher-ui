@@ -1,5 +1,6 @@
 export default {
   newFishingEvent: {},
+  fishingEvents: [],
   fishSpeciesOptions: [],
   lureOptions: [],
   fishingMethodOptions: [],

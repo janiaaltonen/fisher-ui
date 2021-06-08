@@ -1,15 +1,23 @@
 <template>
-  <NewEvent />
+  <ListEvents :fishing-events="fishingEvents" />
 </template>
 
 <script>
-import NewEvent from "../components/NewEvent";
+import ListEvents from "../components/ListEvents";
 
 export default {
   name: "Home",
 
   components: {
-    NewEvent,
+    ListEvents,
+  },
+  computed: {
+    fishingEvents() {
+      return this.$store.state.fishCatch.fishingEvents;
+    },
+  },
+  created() {
+    this.$store.dispatch("fishCatch/getAllFishingEvents");
   },
 };
 </script>
