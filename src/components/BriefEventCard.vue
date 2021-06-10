@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     showDetails(id) {
-      console.log(id);
+      this.$router.push({ name: "EventDetails", params: { id: id } });
     },
   },
 };

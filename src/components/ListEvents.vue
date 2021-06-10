@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import EventCard from "./EventCard";
+import EventCard from "./BriefEventCard";
 export default {
   name: "ListEvents",
   components: { EventCard },

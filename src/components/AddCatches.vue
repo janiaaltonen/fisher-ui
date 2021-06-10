@@ -9,7 +9,9 @@
             <v-row no-gutters>
               <v-col cols="5">
                 <v-fade-transition leave-absolute>
-                  <span v-if="c.species"> {{ i + 1 }}. {{ c.species }} </span>
+                  <span v-if="c.fish_species">
+                    {{ i + 1 }}. {{ c.fish_species }}
+                  </span>
                   <span v-else> Catch # {{ i + 1 }} </span>
                 </v-fade-transition>
               </v-col>
