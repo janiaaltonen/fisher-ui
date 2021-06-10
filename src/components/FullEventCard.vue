@@ -16,7 +16,7 @@
       </v-card-subtitle>
     </v-img>
     <v-card-text>
-      <CatchesPanel :catches="this.fishingEvent.catches" />
+      <CatchesPanel :catches="fishingEvent.catches" />
     </v-card-text>
     <v-card-text>
       <div class="black--text">
