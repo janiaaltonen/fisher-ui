@@ -62,6 +62,15 @@ export const getAllEvents = async () => {
     return [];
   }
 };
+
+export const deleteEvent = async (id) => {
+  try {
+    const r = await http.delete(`deleteEvent/${id}`);
+    return r.data;
+  } catch (e) {
+    return {};
+  }
+};
 /*
 export const getFullFishingEvent = async () => {
   try {

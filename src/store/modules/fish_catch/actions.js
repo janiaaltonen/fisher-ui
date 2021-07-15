@@ -5,6 +5,7 @@ import {
   getWeatherOptions,
   createNewFishingEvent,
   getAllEvents,
+  deleteEvent,
 } from "../../../services/api";
 import state from "./state";
 
@@ -54,5 +55,10 @@ export default {
   async getAllFishingEvents({ commit }) {
     const data = await getAllEvents();
     commit("setFishingEvents", data);
+  },
+
+  async deleteFishingevent({ commit }, id) {
+    const r = await deleteEvent(id);
+    commit("deleteFishingEvent", r.id);
   },
 };

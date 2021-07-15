@@ -2,7 +2,7 @@
   <v-card class="mx-auto" max-width="600">
     <v-img
       class="white--text align-end"
-      height="150px"
+      height="100px"
       src="IMG_20210605_221601.jpg"
     >
       <v-card-title> {{ fishingEvent.location }} </v-card-title>

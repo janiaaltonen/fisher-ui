@@ -2,7 +2,10 @@
   <v-expansion-panels :disabled="catches.length === 0">
     <v-expansion-panel>
       <v-expansion-panel-header>
-        Catches: {{ catches.length }}</v-expansion-panel-header
+        Catches: {{ catches.length }}<v-spacer></v-spacer
+        ><v-icon v-if="editable" right color="blue"
+          >mdi-pencil</v-icon
+        ></v-expansion-panel-header
       >
       <v-expansion-panel-content>
         <v-expansion-panels v-for="(c, i) in catches" :key="i">
@@ -23,19 +26,19 @@
               <div v-if="c.weight || c.length || c.fishing_technique || c.lure">
                 <v-row v-if="c.weight && c.length">
                   <v-col v-if="c.weight">
-                    <v-icon left> mdi-weight</v-icon> 0,25 kg
+                    <v-icon left> mdi-weight</v-icon> {{ c.weight }} kg
                   </v-col>
                   <v-col v-if="c.length">
-                    <v-icon left> mdi-ruler</v-icon> 28 cm
+                    <v-icon left> mdi-ruler</v-icon> {{ c.length }}cm
                   </v-col>
                 </v-row>
                 <v-row v-if="c.fishing_technique">
                   <v-col> Method </v-col>
-                  <v-col> Fly fishing </v-col>
+                  <v-col> {{ c.fishing_technique }} </v-col>
                 </v-row>
                 <v-row v-if="c.lure">
                   <v-col> Lure </v-col>
-                  <v-col> Jig </v-col>
+                  <v-col> {{ c.lure }}</v-col>
                 </v-row>
               </div>
               <div v-else>
@@ -54,7 +57,7 @@
 <script>
 export default {
   name: "CatchesPanel",
-  props: ["catches"],
+  props: ["catches", "editable"],
 };
 </script>
 

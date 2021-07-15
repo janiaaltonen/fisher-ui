@@ -23,4 +23,8 @@ export default {
   setFishingEvents: (state, data) => {
     state.fishingEvents = data;
   },
+  deleteFishingEvent: (state, id) => {
+    const eventIndex = state.fishingEvents.find((v) => v.id === id);
+    state.fishingEvents.splice(eventIndex, 1);
+  },
 };
