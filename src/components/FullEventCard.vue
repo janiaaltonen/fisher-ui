@@ -145,8 +145,14 @@ export default {
     confirmDelete(bool) {
       // this should call the store to remove the element from backend and then remove it from store
       // now it just hides the dialog whetgher yes or no is clicked
-      console.log(bool);
+      if (bool) {
+        this.$store.dispatch(
+          "fishCatch/deleteFishingEvent",
+          this.$route.params.id
+        );
+      }
       this.dial = false;
+      this.$router.push({ name: "Home" });
     },
   },
 };

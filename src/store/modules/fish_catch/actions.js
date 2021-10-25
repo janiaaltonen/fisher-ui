@@ -57,7 +57,7 @@ export default {
     commit("setFishingEvents", data);
   },
 
-  async deleteFishingevent({ commit }, id) {
+  async deleteFishingEvent({ commit }, id) {
     const r = await deleteEvent(id);
     commit("deleteFishingEvent", r.id);
   },
